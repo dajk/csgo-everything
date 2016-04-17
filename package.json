@@ -1,0 +1,22 @@
+{
+  "name": "csgo-everything",
+  "version": "1.0.0",
+  "description": "Everything about CSGO",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dajk/csgo-everything.git"
+  },
+  "keywords": [
+    "CSGO"
+  ],
+  "author": "Radovan Hajdukovic <hajdukovic.radovan@gmail.com> (https://at.linkedin.com/in/radovan-hajdukovic-a2004984)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dajk/csgo-everything/issues"
+  },
+  "homepage": "https://github.com/dajk/csgo-everything#readme"
+}
