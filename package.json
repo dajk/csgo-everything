@@ -4,6 +4,8 @@
   "description": "Everything about CSGO",
   "main": "src/index.js",
   "scripts": {
+    "serve": "webpack-dev-server",
+    "dev": "npm run serve && webpack --progress --colors --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

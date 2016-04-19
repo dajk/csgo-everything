@@ -1,4 +1,4 @@
-[
+export default [
   "Natus Vincere",
   "fnatic",
   "SK Gaming",
