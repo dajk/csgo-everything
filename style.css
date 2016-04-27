@@ -1,12 +1,20 @@
 body {
   font-family: 'Oswald', sans-serif;
+  text-align: center;
 }
 
 a {
   text-decoration: none;
   color: #bab;
+  display: block;
 }
 
 ul {
   list-style: none;
+  padding-left: 0;
+}
+
+.players-list:not(:last-child)::after {
+  content: ' - ';
+  margin: 10px;
 }
