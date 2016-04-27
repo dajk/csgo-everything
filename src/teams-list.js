@@ -13,7 +13,7 @@ export default class TeamsList extends React.Component {
 
   render() {
     return (
-        <ul style={{ listStyle: 'none' }}>
+        <ul>
           <h2> List of teams: </h2>
           { this.renderTeams() }
         </ul>

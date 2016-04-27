@@ -3,11 +3,7 @@ var path = require('path');
 
 module.exports = {
   devtool: 'eval',
-  entry: [
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server',
-    './src'
-  ],
+  entry: getEntrySources(['./src']),
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -25,3 +21,12 @@ module.exports = {
     }]
   }
 };
+
+function getEntrySources(sources) {
+  if (process.env.NODE_ENV !== 'production') {
+    sources.push('webpack-dev-server/client?http://localhost:3000');
+    sources.push('webpack/hot/only-dev-server');
+  }
+
+  return sources;
+}
