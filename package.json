@@ -21,6 +21,9 @@
   },
   "homepage": "https://github.com/dajk/csgo-everything#readme",
   "dependencies": {
+    "express": "4.13.4",
+    "hltv-api": "1.1.1",
+    "moment": "2.13.0",
     "react": "15.0.1",
     "react-dom": "15.0.1"
   },
