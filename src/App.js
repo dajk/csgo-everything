@@ -11,7 +11,11 @@ export class App extends React.Component {
 
     this.state = {
       teams,
-      upcomingMatches: []
+      upcomingMatches: [],
+      hotMatches: [],
+      latestNews: [],
+      latestBlogs: [],
+      latestDemos: []
     };
   }
 
@@ -25,18 +29,125 @@ export class App extends React.Component {
         upcomingMatches: res.hltv
       });
     }.bind(this));
+
+    fetch('http://localhost:5000/api/hot-matches', {
+      method: 'get'
+    }).then(function(data) {
+      return data.json();
+    }).then(function(res) {
+      this.setState({
+        hotMatches: res.hltv
+      });
+    }.bind(this));
+
+    fetch('http://localhost:5000/api/latest-news', {
+      method: 'get'
+    }).then(function(data) {
+      return data.json();
+    }).then(function(res) {
+      this.setState({
+        latestNews: res.news
+      });
+    }.bind(this));
+
+    fetch('http://localhost:5000/api/latest-blogs', {
+      method: 'get'
+    }).then(function(data) {
+      return data.json();
+    }).then(function(res) {
+      this.setState({
+        latestBlogs: res.blog
+      });
+    }.bind(this));
+
+    fetch('http://localhost:5000/api/latest-demos', {
+      method: 'get'
+    }).then(function(data) {
+      return data.json();
+    }).then(function(res) {
+      this.setState({
+        latestDemos: res.demo
+      });
+    }.bind(this));
   }
 
   renderMatches() {
     const matches = this.state.upcomingMatches.map((match, index) =>
       <li key={index} {...match} style={{ paddingTop: '15px', borderTop: '1px solid #ddd' }}>
-        <a target="_blank" href={match.link}>{match.title}</a>
-        <span style={{ fontSize: '12px', color: '#222', fontFamily: 'arial' }}>{moment(match.date).format('MMM Do (ddd), h:mm a')}</span>
+        <a target="_blank" href={match.link}>
+          {match.title}
+        </a>
+        <span style={{ fontSize: '12px', color: '#222', fontFamily: 'arial' }}>
+          {moment(match.date).format('MMM Do (ddd), h:mm a')}
+        </span>
         <p>{match.description}</p>
       </li>
     );
 
     return matches;
+  }
+
+  renderHotMatches() {
+    const hotMatches = this.state.hotMatches.map((match, index) =>
+      <li key={index} {...match} style={{ paddingTop: '15px', borderTop: '1px solid #ddd' }}>
+        <a target="_blank" href={match.link}>
+          {match.title}
+        </a>
+        <span style={{ fontSize: '12px', color: '#222', fontFamily: 'arial' }}>
+          {moment(match.date).format('MMM Do (ddd), h:mm a')}
+        </span>
+        <p>{match.description}</p>
+      </li>
+    );
+
+    return hotMatches;
+  }
+
+  renderLatestNews() {
+    const latestNews = this.state.latestNews.map((news, index) =>
+      <li key={index} {...news} style={{ paddingTop: '15px', borderTop: '1px solid #ddd' }}>
+        <a target="_blank" href={news.link}>
+          {news.title}
+        </a>
+        <span style={{ fontSize: '12px', color: '#222', fontFamily: 'arial' }}>
+          {moment(news.date).format('MMM Do (ddd), h:mm a')}
+        </span>
+      </li>
+    );
+
+    return latestNews;
+  }
+
+  renderLatestBlogs() {
+    const latestBlogs = this.state.latestBlogs.map((blog, index) =>
+      <li key={index} {...blog} style={{ maxWidth: '200px', paddingTop: '15px', borderTop: '1px solid #ddd' }}>
+        <a target="_blank" href={blog.link}>
+          {blog.title}
+        </a>
+        <span style={{ fontSize: '12px', color: '#222', fontFamily: 'arial' }}>
+          {moment(blog.date).format('MMM Do (ddd), h:mm a')}
+        </span>
+      </li>
+    );
+
+    return latestBlogs;
+  }
+
+  renderLatestDemos() {
+    const latestDemos = this.state.latestDemos.map((demo, index) =>
+      <li key={index} {...demo} style={{ maxWidth: '200px', paddingTop: '15px', borderTop: '1px solid #ddd' }}>
+        <a target="_blank" href={demo.link}>
+          {demo.title}
+        </a>
+        <span style={{ fontSize: '12px', color: '#222', fontFamily: 'arial' }}>
+          {moment(demo.date).format('MMM Do (ddd), h:mm a')}
+        </span>
+        <p>{demo.description}</p>
+        <p>{demo.map}</p>
+      </li>
+    );
+
+    return latestDemos;
   }
 
   render() {
@@ -48,6 +159,26 @@ export class App extends React.Component {
         <ul style={{ marginRight: '10px', boxShadow: '0 0 4px 0 rgba(0,0,0,0.5)', float: 'left', padding: '1em' }}>
           <h2> List of matches: </h2>
           { this.renderMatches() }
+        </ul>
+
+        <ul style={{ marginRight: '10px', boxShadow: '0 0 4px 0 rgba(0,0,0,0.5)', float: 'left', padding: '1em' }}>
+          <h2> List of hot matches: </h2>
+          { this.renderHotMatches() }
+        </ul>
+
+        <ul style={{ marginRight: '10px', boxShadow: '0 0 4px 0 rgba(0,0,0,0.5)', float: 'left', padding: '1em' }}>
+          <h2> List of news: </h2>
+          { this.renderLatestNews() }
+        </ul>
+
+        <ul style={{ marginRight: '10px', boxShadow: '0 0 4px 0 rgba(0,0,0,0.5)', float: 'left', padding: '1em' }}>
+          <h2> List of blogs: </h2>
+          { this.renderLatestBlogs() }
+        </ul>
+
+        <ul style={{ marginRight: '10px', boxShadow: '0 0 4px 0 rgba(0,0,0,0.5)', float: 'left', padding: '1em' }}>
+          <h2> List of demos: </h2>
+          { this.renderLatestDemos() }
         </ul>
       </div>
     )

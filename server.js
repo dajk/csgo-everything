@@ -13,8 +13,32 @@ app.use(function(req, res, next) {
 });
 
 app.get('/api/upcoming-matches', function(req, res) {
-  hltvApi.getUpcomingMatches.getData(function(games) {
-    res.json(games);
+  hltvApi.getUpcomingMatches.getData(function(matches) {
+    res.json(matches);
+  });
+});
+
+app.get('/api/hot-matches', function(req, res) {
+  hltvApi.getHotMatches.getData(function(matches) {
+    res.json(matches);
+  });
+});
+
+app.get('/api/latest-news', function(req, res) {
+  hltvApi.getLatestNews.getData(function(news) {
+    res.json(news);
+  });
+});
+
+app.get('/api/latest-blogs', function(req, res) {
+  hltvApi.getLatestBlogs.getData(function(blogs) {
+    res.json(blogs);
+  });
+});
+
+app.get('/api/latest-demos', function(req, res) {
+  hltvApi.getLatestDemos.getData(function(demos) {
+    res.json(demos);
   });
 });
 
