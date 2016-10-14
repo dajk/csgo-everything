@@ -12,18 +12,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get('/api/upcoming-matches', function(req, res) {
-  hltvApi.getUpcomingMatches.getData(function(matches) {
-    res.json(matches);
-  });
-});
-
-app.get('/api/hot-matches', function(req, res) {
-  hltvApi.getHotMatches.getData(function(matches) {
-    res.json(matches);
-  });
-});
-
 app.get('/api/latest-news', function(req, res) {
   hltvApi.getLatestNews.getData(function(news) {
     res.json(news);

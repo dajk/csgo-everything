@@ -20,26 +20,6 @@ export class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:5000/api/upcoming-matches', {
-      method: 'get'
-    }).then(function(data) {
-      return data.json();
-    }).then(function(res) {
-      this.setState({
-        upcomingMatches: res.hltv
-      });
-    }.bind(this));
-
-    fetch('http://localhost:5000/api/hot-matches', {
-      method: 'get'
-    }).then(function(data) {
-      return data.json();
-    }).then(function(res) {
-      this.setState({
-        hotMatches: res.hltv
-      });
-    }.bind(this));
-
     fetch('http://localhost:5000/api/latest-news', {
       method: 'get'
     }).then(function(data) {
@@ -69,38 +49,6 @@ export class App extends React.Component {
         latestDemos: res.demo
       });
     }.bind(this));
-  }
-
-  renderMatches() {
-    const matches = this.state.upcomingMatches.map((match, index) =>
-      <li key={index} {...match} style={{ paddingTop: '15px', borderTop: '1px solid #ddd' }}>
-        <a target="_blank" href={match.link}>
-          {match.title}
-        </a>
-        <span style={{ fontSize: '12px', color: '#222', fontFamily: 'arial' }}>
-          {moment(match.date).format('MMM Do (ddd), h:mm a')}
-        </span>
-        <p>{match.description}</p>
-      </li>
-    );
-
-    return matches;
-  }
-
-  renderHotMatches() {
-    const hotMatches = this.state.hotMatches.map((match, index) =>
-      <li key={index} {...match} style={{ paddingTop: '15px', borderTop: '1px solid #ddd' }}>
-        <a target="_blank" href={match.link}>
-          {match.title}
-        </a>
-        <span style={{ fontSize: '12px', color: '#222', fontFamily: 'arial' }}>
-          {moment(match.date).format('MMM Do (ddd), h:mm a')}
-        </span>
-        <p>{match.description}</p>
-      </li>
-    );
-
-    return hotMatches;
   }
 
   renderLatestNews() {
@@ -155,16 +103,6 @@ export class App extends React.Component {
       <div>
         <Header />
         <TeamsList teams={this.state.teams} />
-        
-        <ul style={{ marginRight: '10px', boxShadow: '0 0 4px 0 rgba(0,0,0,0.5)', float: 'left', padding: '1em' }}>
-          <h2> List of matches: </h2>
-          { this.renderMatches() }
-        </ul>
-
-        <ul style={{ marginRight: '10px', boxShadow: '0 0 4px 0 rgba(0,0,0,0.5)', float: 'left', padding: '1em' }}>
-          <h2> List of hot matches: </h2>
-          { this.renderHotMatches() }
-        </ul>
 
         <ul style={{ marginRight: '10px', boxShadow: '0 0 4px 0 rgba(0,0,0,0.5)', float: 'left', padding: '1em' }}>
           <h2> List of news: </h2>
@@ -181,7 +119,7 @@ export class App extends React.Component {
           { this.renderLatestDemos() }
         </ul>
       </div>
-    )
+    );
   }
 
 }
